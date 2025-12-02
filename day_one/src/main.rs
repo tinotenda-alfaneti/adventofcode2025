@@ -1,10 +1,10 @@
 mod solutions;
-mod utils;
+use aoc_common as common;
 
 fn main() {
     let file_path = "input.txt";
 
-    let lines = match utils::read_file_to_vec(file_path) {
+    let lines = match common::read_file_to_vec(file_path) {
         Ok(lines) => lines,
         Err(e) => {
             eprintln!("Error reading file: {}", e);

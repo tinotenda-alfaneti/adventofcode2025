@@ -1,0 +1,1 @@
+C:\Users\tinot\Desktop\projects\adventofcode2025\target\debug\day_one.exe: C:\Users\tinot\Desktop\projects\adventofcode2025\aoc_common\src\lib.rs C:\Users\tinot\Desktop\projects\adventofcode2025\day_one\src\main.rs C:\Users\tinot\Desktop\projects\adventofcode2025\day_one\src\solutions.rs

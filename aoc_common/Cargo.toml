@@ -1,0 +1,10 @@
+[package]
+name = "aoc_common"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+name = "aoc_common"
+path = "src/lib.rs"
+
+[dependencies]
