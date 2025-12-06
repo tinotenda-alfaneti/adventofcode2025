@@ -19,3 +19,23 @@ Do whatever you like with this code. If it helps you learn, it's already done it
 Happy hacking, and may your borrow checker be generous!
 
 - Me (learning Rust, one puzzle at a time)
+ 
+## Repo layout and how to run
+
+This repository contains one small crate per puzzle (folders named `day_one`, `day_two`, etc.) plus a shared crate `aoc_common` used for helpers. Each day is a tiny, focused crate with its own `Cargo.toml` and small test harnesses.
+
+This layout is perfectly fine and common for personal learning projects. The added per-day README files document the approach used and the Rust concepts in each solution so they serve as a study notebook.
+
+How to run a specific day (options):
+
+- From the repo root (if you're using a Cargo workspace with members), you can run a specific package with:
+
+	cargo run -p day_one
+
+- Or change into the day's folder and run directly:
+
+	cd day_one; cargo run
+
+Running tests for a day:
+
+	cd day_one; cargo test

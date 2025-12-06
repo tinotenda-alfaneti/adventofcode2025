@@ -87,8 +87,6 @@ pub struct RightToLeft;
 
 impl ParseStrategy for LeftToRight {
     fn parse_numbers(&self, cg: &ColumnGroup) -> Result<Vec<i64>> {
-        // Left-to-right interpretation: each ROW (except the bottom operator row)
-        // is a number read left-to-right across the group's columns.
         let rows = cg.to_rows();
         if rows.is_empty() {
             return Ok(vec![]);

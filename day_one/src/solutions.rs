@@ -4,8 +4,6 @@ pub fn part_one(lines: &[String]) -> i32 {
     let mut dial_start = 50;
     let mut password = 0;
 
-    println!("Processing {} lines for Part 1", lines.len());
-
     for line in lines {
     if let Ok((letter, number)) = common::split_alpha_num(line) {
             dial_start = match letter.as_str() {

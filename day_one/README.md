@@ -1,3 +1,23 @@
+Day One — Learning notes
+
+What I solved
+- Implemented two parts that simulate dial movements and count when the dial hits zero.
+
+Rust concepts used
+- Parsing and ownership: input is read as a single string, converted to a `Vec<String>` with `input.lines().map(|s| s.to_string()).collect()` in `lib.rs`.
+- Borrowing/slices: the core functions take `&[String]` so they operate on borrowed data.
+- Pattern matching & control flow: `if let Ok((letter, number)) = ...` and `match` on a string to branch left/right.
+- Numeric wrapping: use of `rem_euclid` to keep values in range.
+- Error handling: simple error reporting with `eprintln!` on parse failures.
+- Tests: small smoke tests under `#[cfg(test)]`.
+
+Approach
+- Parse each line into a (direction, steps) pair (reusing helpers from `aoc_common`).
+- Use a dial position variable and update it per instruction, counting occurrences when it becomes zero.
+
+Notes / study tips
+- `rem_euclid` is handy for modular arithmetic with positive results.
+- Passing `&[String]` avoids cloning for each call and demonstrates borrowing collections.
 - `Cargo.toml` — project manifest. Run the project with Cargo.
 - `src/main.rs` — the program entry point. Contains orchestration and I/O handling.
 - `src/solutions.rs` — solution logic split out for clarity and testability.

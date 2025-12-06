@@ -82,9 +82,9 @@ pub fn removed_total(lines: &[String]) -> usize {
 }
 
 pub fn solve(lines: Vec<String>) -> (usize, usize) {
-    let part1 = count_accessible(&lines);
-    let part2 = removed_total(&lines);
-    (part1, part2)
+    let accessible = count_accessible(&lines);
+    let rtotal = removed_total(&lines);
+    (accessible, rtotal)
 }
 
 #[cfg(test)]
