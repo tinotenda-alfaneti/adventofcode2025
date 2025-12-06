@@ -9,38 +9,53 @@ pipeline {
     stages {
         stage('Setup Rust') {
             steps {
-                sh """
+                sh '''
                     curl https://sh.rustup.rs -sSf | sh -s -- -y
-                    source $HOME/.cargo/env
+
+                    # POSIX compliant shell load (instead of source)
+                    . "$HOME/.cargo/env"
+
                     rustc --version
                     cargo --version
-                """
+                '''
             }
         }
 
         stage('Build') {
             steps {
-                sh "cargo build --verbose"
+                sh '''
+                    . "$HOME/.cargo/env"
+                    cargo build --verbose
+                '''
             }
         }
 
         stage('Test') {
             steps {
-                sh "cargo test --verbose"
+                sh '''
+                    . "$HOME/.cargo/env"
+                    cargo test --verbose
+                '''
             }
         }
 
         stage('Lint (Clippy)') {
             steps {
-                sh "rustup component add clippy"
-                sh "cargo clippy --all-targets --all-features -- -D warnings"
+                sh '''
+                    . "$HOME/.cargo/env"
+                    rustup component add clippy
+                    cargo clippy --all-targets --all-features -- -D warnings
+                '''
             }
         }
 
         stage('Format Check') {
             steps {
-                sh "rustup component add rustfmt"
-                sh "cargo fmt --all -- --check"
+                sh '''
+                    . "$HOME/.cargo/env"
+                    rustup component add rustfmt
+                    cargo fmt --all -- --check
+                '''
             }
         }
     }
