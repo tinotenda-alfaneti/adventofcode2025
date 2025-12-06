@@ -11,12 +11,26 @@ pipeline {
             steps {
                 sh '''
                     curl https://sh.rustup.rs -sSf | sh -s -- -y
-
-                    # POSIX compliant shell load (instead of source)
                     . "$HOME/.cargo/env"
+                '''
+            }
+        }
 
-                    rustc --version
-                    cargo --version
+        stage('Install Build Tools') {
+            steps {
+                sh '''
+                    echo "Detecting OS for compiler setup..."
+                    if command -v apt-get >/dev/null 2>&1; then
+                        echo "Installing build-essential (Debian/Ubuntu)..."
+                        apt-get update -y
+                        apt-get install -y build-essential clang pkg-config libssl-dev
+                    elif command -v apk >/dev/null 2>&1; then
+                        echo "Installing toolchain (Alpine)..."
+                        apk add --no-cache build-base clang pkgconfig openssl-dev
+                    else
+                        echo "Unsupported base image: no apt or apk found"
+                        exit 1
+                    fi
                 '''
             }
         }
