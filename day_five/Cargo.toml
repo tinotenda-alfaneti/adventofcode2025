@@ -5,3 +5,5 @@ edition = "2024"
 
 [dependencies]
 aoc_common = { path = "../aoc_common" }
+anyhow = "1.0.100"
+proptest = "1.0"
