@@ -1,4 +1,4 @@
-use anyhow::{anyhow, Result};
+use anyhow::{Result, anyhow};
 
 pub struct Worksheet {
     pub lines: Vec<String>,
@@ -16,15 +16,22 @@ impl Worksheet {
                 l.push_str(&" ".repeat(width - l.len()));
             }
         }
-        Worksheet { lines: lines.clone(), width }
+        Worksheet {
+            lines: lines.clone(),
+            width,
+        }
     }
-    
+
     pub fn column_groups(&self) -> Vec<ColumnGroup> {
         let mut groups = Vec::new();
         let mut current: Vec<Vec<char>> = Vec::new();
 
         for col in 0..self.width {
-            let col_chars: Vec<char> = self.lines.iter().map(|l| l.chars().nth(col).unwrap()).collect();
+            let col_chars: Vec<char> = self
+                .lines
+                .iter()
+                .map(|l| l.chars().nth(col).unwrap())
+                .collect();
 
             let is_empty = col_chars.iter().all(|c| *c == ' ');
 
@@ -92,7 +99,7 @@ impl ParseStrategy for LeftToRight {
             return Ok(vec![]);
         }
         let mut out = Vec::new();
-        for row in rows[..rows.len()-1].iter() {
+        for row in rows[..rows.len() - 1].iter() {
             let t = row.trim();
             if !t.is_empty() {
                 out.push(t.parse::<i64>()?);

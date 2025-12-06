@@ -1,6 +1,5 @@
 #[test]
 fn merge_and_solve_smoke() {
-
     let input = vec![
         "1-3".to_string(),
         "5-5".to_string(),

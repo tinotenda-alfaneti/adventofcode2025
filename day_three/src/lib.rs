@@ -12,7 +12,6 @@ pub fn largest_twelve_digit(s: &str) -> u64 {
     largest_n_digit(s, 12).unwrap_or(0)
 }
 
-
 pub fn largest_n_digit(s: &str, keep: usize) -> Result<u64, ParseIntError> {
     let digits: Vec<char> = s.chars().filter(|c| c.is_ascii_digit()).collect();
     if keep == 0 {
@@ -39,4 +38,3 @@ pub fn largest_n_digit(s: &str, keep: usize) -> Result<u64, ParseIntError> {
     let s: String = stack.into_iter().collect();
     s.parse::<u64>()
 }
-

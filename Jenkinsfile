@@ -1,12 +1,23 @@
 pipeline {
-    agent {
-        docker {
-            image 'rust:latest'
-            args '-u root' 
-        }
+    agent any
+
+    environment {
+        CARGO_HOME = "$HOME/.cargo"
+        PATH = "$HOME/.cargo/bin:$PATH"
     }
 
     stages {
+        stage('Setup Rust') {
+            steps {
+                sh """
+                    curl https://sh.rustup.rs -sSf | sh -s -- -y
+                    source $HOME/.cargo/env
+                    rustc --version
+                    cargo --version
+                """
+            }
+        }
+
         stage('Build') {
             steps {
                 sh "cargo build --verbose"

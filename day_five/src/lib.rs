@@ -1,4 +1,4 @@
-use anyhow::{anyhow, Context, Result};
+use anyhow::{Context, Result, anyhow};
 
 /// Parse the input lines into a list of ranges and a list of ids.
 pub fn parse_input(lines: Vec<String>) -> Result<(Vec<(u64, u64)>, Vec<u64>)> {

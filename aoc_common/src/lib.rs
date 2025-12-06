@@ -24,7 +24,9 @@ pub fn read_file_to_vec(path: &str) -> io::Result<Vec<String>> {
 /// Split a string into leading alphabetic part and trailing integer part.
 /// Returns (alpha_part, number). If no digits are present the number is 0.
 pub fn split_alpha_num(input: &str) -> Result<(String, i32), ParseIntError> {
-    let idx = input.find(|c: char| c.is_ascii_digit()).unwrap_or(input.len());
+    let idx = input
+        .find(|c: char| c.is_ascii_digit())
+        .unwrap_or(input.len());
 
     let alpha_part = input[..idx].to_string();
     let num_part_str = &input[idx..];
@@ -44,12 +46,8 @@ pub fn read_file_to_string(path: &str) -> std::io::Result<String> {
 
 /// Split `input` by the given delimiter character, trimming whitespace from each piece.
 pub fn split_and_trim(input: &str, delim: char) -> Vec<String> {
-    input
-        .split(delim)
-        .map(|s| s.trim().to_string())
-        .collect()
+    input.split(delim).map(|s| s.trim().to_string()).collect()
 }
-
 
 #[cfg(test)]
 mod tests {
@@ -66,7 +64,7 @@ mod tests {
     #[test]
     fn test_read_one_line_file() {
         let path = "one_line.txt";
-        fs::write(path, "hello") .unwrap();
+        fs::write(path, "hello").unwrap();
 
         let content = read_file_to_string(path).unwrap();
         assert_eq!(content, "hello");

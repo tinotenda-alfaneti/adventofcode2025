@@ -2,9 +2,9 @@ use proptest::prelude::*;
 
 use std::collections::BTreeSet;
 
-fn expand_ranges(ranges: &[(u64,u64)]) -> BTreeSet<u64> {
+fn expand_ranges(ranges: &[(u64, u64)]) -> BTreeSet<u64> {
     let mut s = BTreeSet::new();
-    for &(a,b) in ranges {
+    for &(a, b) in ranges {
         for v in a..=b {
             s.insert(v);
         }
@@ -15,7 +15,7 @@ fn expand_ranges(ranges: &[(u64,u64)]) -> BTreeSet<u64> {
 proptest! {
     #[test]
     fn merge_ranges_invariants(mut ranges in prop::collection::vec((0u64..100u64, 0u64..100u64), 1..10)) {
-   
+
         for r in ranges.iter_mut() {
             if r.0 > r.1 { std::mem::swap(&mut r.0, &mut r.1); }
         }

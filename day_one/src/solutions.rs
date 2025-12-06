@@ -5,7 +5,7 @@ pub fn part_one(lines: &[String]) -> i32 {
     let mut password = 0;
 
     for line in lines {
-    if let Ok((letter, number)) = common::split_alpha_num(line) {
+        if let Ok((letter, number)) = common::split_alpha_num(line) {
             dial_start = match letter.as_str() {
                 "L" => (dial_start - number).rem_euclid(100),
                 "R" => (dial_start + number).rem_euclid(100),
@@ -26,10 +26,10 @@ pub fn part_one(lines: &[String]) -> i32 {
 pub fn part_two(lines: &[String]) -> i32 {
     let dial_size = 100;
     let mut dial_start = 50;
-    let mut password  = 0;
+    let mut password = 0;
 
     for line in lines {
-    if let Ok((letter, steps)) = common::split_alpha_num(line) {
+        if let Ok((letter, steps)) = common::split_alpha_num(line) {
             let direction = letter.chars().next().unwrap_or('R');
             let clockwise = direction == 'R';
             let abs_steps = steps.abs();
@@ -60,5 +60,5 @@ pub fn part_two(lines: &[String]) -> i32 {
         }
     }
 
-     password
+    password
 }

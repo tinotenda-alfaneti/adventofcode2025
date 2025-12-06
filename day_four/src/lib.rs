@@ -1,4 +1,3 @@
-
 pub fn parse_grid(lines: &[String]) -> Vec<Vec<char>> {
     lines.iter().map(|row| row.chars().collect()).collect()
 }
@@ -13,9 +12,14 @@ pub fn is_accessible(map: &Vec<Vec<char>>, r: usize, c: usize) -> bool {
     let w = map[0].len();
 
     let dirs = [
-        (-1, -1), (-1, 0), (-1, 1),
-        (0, -1),           (0, 1),
-        (1, -1),  (1, 0),  (1, 1),
+        (-1, -1),
+        (-1, 0),
+        (-1, 1),
+        (0, -1),
+        (0, 1),
+        (1, -1),
+        (1, 0),
+        (1, 1),
     ];
 
     let mut adj = 0usize;
@@ -35,9 +39,10 @@ pub fn is_accessible(map: &Vec<Vec<char>>, r: usize, c: usize) -> bool {
     adj < 4
 }
 
-
 pub fn count_accessible(lines: &[String]) -> usize {
-    if lines.is_empty() { return 0; }
+    if lines.is_empty() {
+        return 0;
+    }
     let map = parse_grid(lines);
     let h = map.len();
     let w = map[0].len();
@@ -54,7 +59,9 @@ pub fn count_accessible(lines: &[String]) -> usize {
 }
 
 pub fn removed_total(lines: &[String]) -> usize {
-    if lines.is_empty() { return 0; }
+    if lines.is_empty() {
+        return 0;
+    }
     let h = lines.len();
     let w = lines[0].len();
 
@@ -71,7 +78,9 @@ pub fn removed_total(lines: &[String]) -> usize {
             }
         }
         let removed_this_round = to_remove.len();
-        if removed_this_round == 0 { break; }
+        if removed_this_round == 0 {
+            break;
+        }
         for (r, c) in to_remove {
             map[r][c] = '.';
         }

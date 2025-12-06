@@ -15,5 +15,3 @@ fn main() {
     println!("Accessible: {}", part1);
     println!("Total Removed: {}", part2);
 }
-
-

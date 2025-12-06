@@ -1,5 +1,5 @@
+use crate::worksheet::{RightToLeft, Worksheet};
 use anyhow::Result;
-use crate::worksheet::{Worksheet, RightToLeft};
 
 pub fn solve(lines: &mut Vec<String>) -> Result<i64> {
     let ws = Worksheet::from_mut(lines);

@@ -10,7 +10,9 @@ fn grouping_and_parse_right_to_left() {
 
     let mut results = Vec::new();
     for g in groups {
-        let p = g.parse_problem(&lib::worksheet::RightToLeft).expect("parse failed");
+        let p = g
+            .parse_problem(&lib::worksheet::RightToLeft)
+            .expect("parse failed");
         results.push(p.result());
     }
 

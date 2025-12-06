@@ -2,7 +2,6 @@ use aoc_common as common;
 use day_two as lib;
 
 fn main() {
-    
     let file_path = "input.txt";
     let lines = match common::read_file_to_string(file_path) {
         Ok(lines) => lines,
@@ -18,4 +17,3 @@ fn main() {
     println!("Part One Result: {}", part1);
     println!("Part Two Result: {}", part2);
 }
-
