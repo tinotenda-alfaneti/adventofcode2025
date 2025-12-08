@@ -1,7 +1,9 @@
 use anyhow::{Context, Result, anyhow};
 
+type Parsed = (Vec<(u64, u64)>, Vec<u64>);
+
 /// Parse the input lines into a list of ranges and a list of ids.
-pub fn parse_input(lines: Vec<String>) -> Result<(Vec<(u64, u64)>, Vec<u64>)> {
+pub fn parse_input(lines: Vec<String>) -> Result<Parsed> {
     let blank_index = lines
         .iter()
         .position(|l| l.trim().is_empty())
@@ -48,11 +50,11 @@ pub fn merge_ranges(mut ranges: Vec<(u64, u64)>) -> Vec<(u64, u64)> {
     let mut merged: Vec<(u64, u64)> = Vec::new();
 
     for (s, e) in ranges.into_iter() {
-        if let Some(last) = merged.last_mut() {
-            if s <= last.1 {
-                last.1 = last.1.max(e);
-                continue;
-            }
+        if let Some(last) = merged.last_mut()
+            && s <= last.1
+        {
+            last.1 = last.1.max(e);
+            continue;
         }
         merged.push((s, e));
     }

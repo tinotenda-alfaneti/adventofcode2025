@@ -1,7 +1,7 @@
 use crate::worksheet::{RightToLeft, Worksheet};
 use anyhow::Result;
 
-pub fn solve(lines: &mut Vec<String>) -> Result<i64> {
+pub fn solve(lines: &mut [String]) -> Result<i64> {
     let ws = Worksheet::from_mut(lines);
     let groups = ws.column_groups();
 

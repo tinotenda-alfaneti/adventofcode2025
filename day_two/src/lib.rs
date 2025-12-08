@@ -45,12 +45,12 @@ pub fn sum_invalid_ids(input: &str, part: u8, debug: bool) -> i64 {
 
 pub fn has_repeated_pattern_twice(num_str: &str) -> bool {
     let len = num_str.len();
-    if len % 2 != 0 || len == 0 {
+    if len == 0 || !len.is_multiple_of(2) {
         return false;
     }
 
     let half = len / 2;
-    &num_str[..half] == &num_str[half..]
+    num_str[..half] == num_str[half..]
 }
 
 pub fn has_more_than_two_repeated_patterns(num_str: &str) -> bool {
@@ -60,7 +60,7 @@ pub fn has_more_than_two_repeated_patterns(num_str: &str) -> bool {
     }
 
     for sub_len in 1..=len / 2 {
-        if len % sub_len != 0 {
+        if !len.is_multiple_of(sub_len) {
             continue;
         }
 

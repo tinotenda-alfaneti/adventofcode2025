@@ -1,5 +1,5 @@
-use day_seven as lib;
 use aoc_common as common;
+use day_seven as lib;
 
 #[test]
 fn example_counts_21() {

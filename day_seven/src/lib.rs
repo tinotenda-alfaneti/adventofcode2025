@@ -1,10 +1,9 @@
-﻿use std::collections::HashSet;
+use std::collections::HashSet;
 
-fn find_start(grid: &Vec<Vec<char>>) -> Option<(usize, usize)> {
-    let h = grid.len();
-    for r in 0..h {
-        for c in 0..grid[r].len() {
-            if grid[r][c] == 'S' {
+fn find_start(grid: &[Vec<char>]) -> Option<(usize, usize)> {
+    for (r, row) in grid.iter().enumerate() {
+        for (c, &ch) in row.iter().enumerate() {
+            if ch == 'S' {
                 return Some((r, c));
             }
         }
@@ -12,25 +11,23 @@ fn find_start(grid: &Vec<Vec<char>>) -> Option<(usize, usize)> {
     None
 }
 
-pub fn count_splits(grid: &Vec<Vec<char>>) -> usize {
-    let h = grid.len();
+pub fn count_splits(grid: &[Vec<char>]) -> usize {
     let w = grid[0].len();
 
     let (sr, sc) = find_start(grid).expect("No S found in grid");
-    let start_beam = (sr + 1, sc);
     let mut splits = 0;
     let mut beams: HashSet<usize> = HashSet::new();
-    if start_beam.0 < h {
-        beams.insert(start_beam.1);
+    if sr + 1 < grid.len() {
+        beams.insert(sc);
     }
 
-    for r in (sr + 1)..h {
+    for (_r, row) in grid.iter().enumerate().skip(sr + 1) {
         if beams.is_empty() {
             break;
         }
         let mut next: HashSet<usize> = HashSet::new();
         for &c in &beams {
-            if grid[r][c] == '^' {
+            if row[c] == '^' {
                 splits += 1;
                 if c > 0 {
                     next.insert(c - 1);
@@ -48,28 +45,26 @@ pub fn count_splits(grid: &Vec<Vec<char>>) -> usize {
     splits
 }
 
-
-pub fn count_timelines(grid: &Vec<Vec<char>>) -> u128 {
-    let h = grid.len();
+pub fn count_timelines(grid: &[Vec<char>]) -> u128 {
     let w = grid[0].len();
 
     let (sr, sc) = find_start(grid).expect("No S found in grid");
 
-    if sr + 1 >= h {
+    if sr + 1 >= grid.len() {
         return 1;
     }
 
     let mut counts = vec![0u128; w];
     counts[sc] = 1;
 
-    for r in (sr + 1)..h {
+    for (_r, row) in grid.iter().enumerate().skip(sr + 1) {
         let mut next = vec![0u128; w];
-        for c in 0..w {
+        for (c, &cell) in row.iter().enumerate() {
             let cnt = counts[c];
             if cnt == 0 {
                 continue;
             }
-            if grid[r][c] == '^' {
+            if cell == '^' {
                 if c > 0 {
                     next[c - 1] = next[c - 1].saturating_add(cnt);
                 }

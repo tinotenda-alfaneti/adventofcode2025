@@ -27,7 +27,7 @@ pub fn largest_n_digit(s: &str, keep: usize) -> Result<u64, ParseIntError> {
     let mut stack: Vec<char> = Vec::with_capacity(keep);
 
     for d in digits {
-        while remove > 0 && stack.last().map_or(false, |&c| c < d) {
+        while remove > 0 && stack.last().is_some_and(|&c| c < d) {
             stack.pop();
             remove -= 1;
         }

@@ -1,6 +1,6 @@
 mod dsu;
 
-pub use dsu::{Point, DisjointSetUnion};
+pub use dsu::{DisjointSetUnion, Point};
 
 pub fn distance(a: &Point, b: &Point) -> f64 {
     ((a.x - b.x).powi(2) + (a.y - b.y).powi(2) + (a.z - b.z).powi(2)).sqrt()
@@ -45,8 +45,11 @@ pub fn prepare(lines: &[String]) -> (Vec<(f64, usize, usize)>, Vec<i128>, usize)
     (pairs, xs, n)
 }
 
-
-pub fn prod_of_top_three(pairs: &[(f64, usize, usize)], n: usize, merge_limit: usize) -> Option<usize> {
+pub fn prod_of_top_three(
+    pairs: &[(f64, usize, usize)],
+    n: usize,
+    merge_limit: usize,
+) -> Option<usize> {
     let mut dsu = DisjointSetUnion::new(n);
     for (idx, &(_, i, j)) in pairs.iter().enumerate() {
         if idx >= merge_limit || idx >= pairs.len() {
@@ -81,5 +84,3 @@ pub fn prod_of_last_con_x(pairs: &[(f64, usize, usize)], xs: &[i128], n: usize) 
     }
     None
 }
-
-

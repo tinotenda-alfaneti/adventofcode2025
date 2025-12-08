@@ -9,7 +9,7 @@ impl Worksheet {
     /// Normalize the given lines in-place (pads them) and return a Worksheet
     /// containing a clone of the normalized lines. This preserves the caller's
     /// buffer mutation behavior while keeping Worksheet ownership local.
-    pub fn from_mut(lines: &mut Vec<String>) -> Self {
+    pub fn from_mut(lines: &mut [String]) -> Self {
         let width = lines.iter().map(|l| l.len()).max().unwrap_or(0);
         for l in lines.iter_mut() {
             if l.len() < width {
@@ -17,7 +17,7 @@ impl Worksheet {
             }
         }
         Worksheet {
-            lines: lines.clone(),
+            lines: lines.to_vec(),
             width,
         }
     }
@@ -63,11 +63,10 @@ impl ColumnGroup {
             return vec![];
         }
         let height = self.cols[0].len();
-        let width = self.cols.len();
         let mut rows = vec![String::new(); height];
-        for r in 0..height {
-            for c in 0..width {
-                rows[r].push(self.cols[c][r]);
+        for (r, row) in rows.iter_mut().enumerate().take(height) {
+            for col in &self.cols {
+                row.push(col[r]);
             }
         }
         rows

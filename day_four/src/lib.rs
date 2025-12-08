@@ -3,7 +3,7 @@ pub fn parse_grid(lines: &[String]) -> Vec<Vec<char>> {
 }
 
 /// Return true if the cell at (r,c) is an '@' and has fewer than 4 adjacent '@'s.
-pub fn is_accessible(map: &Vec<Vec<char>>, r: usize, c: usize) -> bool {
+pub fn is_accessible(map: &[Vec<char>], r: usize, c: usize) -> bool {
     if map[r][c] != '@' {
         return false;
     }
@@ -26,12 +26,15 @@ pub fn is_accessible(map: &Vec<Vec<char>>, r: usize, c: usize) -> bool {
     for (dr, dc) in dirs {
         let nr = r as isize + dr;
         let nc = c as isize + dc;
-        if nr >= 0 && nr < h as isize && nc >= 0 && nc < w as isize {
-            if map[nr as usize][nc as usize] == '@' {
-                adj += 1;
-                if adj >= 4 {
-                    return false;
-                }
+        if nr >= 0
+            && nr < h as isize
+            && nc >= 0
+            && nc < w as isize
+            && map[nr as usize][nc as usize] == '@'
+        {
+            adj += 1;
+            if adj >= 4 {
+                return false;
             }
         }
     }
