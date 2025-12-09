@@ -1,4 +1,4 @@
-mod compressed;
+pub mod compressed;
 
 pub fn solve(lines: &[String]) -> (u64, u64) {
     let mut points: Vec<(i32, i32)> = Vec::new();
