@@ -47,7 +47,6 @@ fn min_presses_ilp(machine: &Machine) -> u32 {
     for counter_idx in 0..num_counters {
         let target_val = machine.target[counter_idx] as f64;
 
-        // Find which buttons affect this counter
         let mut constraint_expr = Expression::from(0.0);
         for (button_idx, button) in machine.buttons.iter().enumerate() {
             if button.contains(&counter_idx) {
