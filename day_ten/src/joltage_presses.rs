@@ -3,7 +3,7 @@ use good_lp::*;
 #[derive(Debug)]
 struct Machine {
     target: Vec<u32>,
-    buttons: Vec<Vec<usize>>, 
+    buttons: Vec<Vec<usize>>,
 }
 
 fn parse_machine(line: &str) -> Machine {
