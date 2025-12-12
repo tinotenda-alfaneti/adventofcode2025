@@ -39,3 +39,46 @@ How to run a specific day (options):
 Running tests for a day:
 
 	cd day_one; cargo test
+
+## Benchmark Results
+
+Performance benchmarks using [Criterion.rs](https://github.com/bheisler/criterion.rs) with statistical analysis over 100 runs per day.
+
+### [View Interactive Benchmark Reports](https://tinotenda-alfaneti.github.io/adventofcode2025/)
+
+
+### Running Benchmarks
+
+To run comprehensive benchmarks with statistical analysis:
+
+	cargo bench
+
+This uses Criterion to:
+- Run each solution 100 times (configurable in `benches/all_days.rs`)
+- Perform warmup iterations to eliminate cold-start effects
+- Calculate mean, standard deviation, and confidence intervals
+- Detect performance regressions between runs
+- Generate detailed HTML reports in `target/criterion/`
+
+The benchmarks measure the actual solution functions (not including `cargo` overhead), giving you precise timing for optimizations.
+
+### Viewing Reports
+
+**Option 1: View locally**
+```bash
+# After running cargo bench, open in browser:
+target/criterion/report/index.html
+```
+
+**Option 2: Publish to GitHub Pages**
+```powershell
+# Run benchmarks and update docs folder
+cargo bench
+.benches\update-reports.ps1
+
+git add docs/
+git commit -m "Update benchmark reports"
+git push
+```
+
+Then visit: `https://tinotenda-alfaneti.github.io/adventofcode2025/`

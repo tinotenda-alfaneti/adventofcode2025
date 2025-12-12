@@ -5,6 +5,3 @@ edition = "2024"
 
 [dependencies]
 aoc_common = { path = "../aoc_common" }
-
-[dev-dependencies]
-criterion = "0.5"

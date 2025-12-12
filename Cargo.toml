@@ -1,2 +1,29 @@
 [workspace]
 members = ["day_one", "day_two", "day_three", "aoc_common", "day_four", "day_five", "day_six", "day_seven", "day_eight", "day_nine", "day_ten", "day_eleven", "day_twelve"]
+
+[package]
+name = "aoc_benchmark"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+day_one = { path = "day_one" }
+day_two = { path = "day_two" }
+day_three = { path = "day_three" }
+day_four = { path = "day_four" }
+day_five = { path = "day_five" }
+day_six = { path = "day_six" }
+day_seven = { path = "day_seven" }
+day_eight = { path = "day_eight" }
+day_nine = { path = "day_nine" }
+day_ten = { path = "day_ten" }
+day_eleven = { path = "day_eleven" }
+day_twelve = { path = "day_twelve" }
+aoc_common = { path = "aoc_common" }
+
+[dev-dependencies]
+criterion = { version = "0.5", features = ["html_reports"] }
+
+[[bench]]
+name = "all_days"
+harness = false

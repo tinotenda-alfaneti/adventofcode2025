@@ -13,18 +13,12 @@ pub fn run(lines: &[String]) -> usize {
     }
 
    
-    let solvable = regions.par_iter()
+    regions.par_iter()
         .enumerate()
-        .filter(|(i, (w, h, counts))| {
-            if *i % 100 == 0 {
-                eprintln!("Processing region {}/{}...", i, regions.len());
-            }
+        .filter(|(_, (w, h, counts))| {
             can_fit_by_area(*w, *h, &shape_areas, counts)
         })
-        .count();
-    
-    eprintln!("Done! {} solvable regions found.", solvable);
-    solvable
+        .count()
 }
 
 type ShapeGrid = Vec<String>;
